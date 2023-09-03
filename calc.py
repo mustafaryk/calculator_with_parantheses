@@ -44,8 +44,11 @@ def correct_equation():
         if character == '-':
             if type(equation[index + 1]) == float:
                 equation.pop(index)
-                equation.insert(index, '+')
-                equation[index + 1] = equation[index + 1] * -1
+                if not equation[index - 1] in operator and not index == 0:
+                    equation.insert(index, '+')
+                    equation[index + 1] = equation[index + 1] * -1
+                else:
+                    equation[index] = equation[index] * -1
         if character == '/':
             if type(equation[index + 1]) == float:
                 equation.pop(index)
@@ -108,4 +111,4 @@ string_to_list()
 correct_equation()
 print(equation)
 isolate_bracket()
-print(round(equation[0, 4]))
+print(round(equation[0], 4))
