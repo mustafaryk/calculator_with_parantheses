@@ -44,12 +44,14 @@ def correct_equation():
     for index, character in enumerate(equation):
         if character == '-':
             if type(equation[index + 1]) == float:
-                equation.pop(index)
-                if not equation[index - 1] in operator and not index == 0 or equation[index - 1] == ')':
+                if not index == 0 and type(equation[index - 1]) == float or (index != 0 and equation[index - 1] == ')'):
+                    equation.pop(index)
+                    equation[index] = equation[index] * - 1
                     equation.insert(index, '+')
-                    equation[index + 1] = equation[index + 1] * -1
                 else:
-                    equation[index] = equation[index] * -1
+                    equation.pop(index)
+                    equation[index] = equation[index] * - 1
+
         if character == '/':
             if type(equation[index + 1]) == float:
                 equation.pop(index)
