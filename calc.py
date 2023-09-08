@@ -39,12 +39,13 @@ def string_to_list():
     if not number_to_be_added == '':
         equation.append(float(number_to_be_added))
 
+
 def correct_equation():
     for index, character in enumerate(equation):
         if character == '-':
             if type(equation[index + 1]) == float:
                 equation.pop(index)
-                if not equation[index - 1] in operator and not index == 0:
+                if not equation[index - 1] in operator and not index == 0 or equation[index - 1] == ')':
                     equation.insert(index, '+')
                     equation[index + 1] = equation[index + 1] * -1
                 else:
