@@ -60,7 +60,6 @@ def correct_equation():
 
 
 def solve(given_equation):
-    print(given_equation)
     for operation in dict_math:
         check = False
         while not check:
@@ -74,7 +73,6 @@ def solve(given_equation):
                     break
                 else:
                     check = True
-    print(given_equation)
     return given_equation[0]
 
 
@@ -112,6 +110,5 @@ def isolate_bracket():
 
 string_to_list()
 correct_equation()
-print(equation)
 isolate_bracket()
 print(round(equation[0], 4))
