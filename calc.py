@@ -4,6 +4,10 @@ operator = ['(', ')', '+', '-', '*', '/', '^']
 equation = []
 
 
+def subtraction(n1, n2):
+    return n1 - n2
+
+
 def addition(n1, n2):
     return n2 + n1
 
@@ -18,7 +22,6 @@ def exponent(n1, n2):
 
 dict_math = {"^": exponent,
              '*': multiplication,
-             '+': addition,
              }
 
 
@@ -43,14 +46,15 @@ def string_to_list():
 def correct_equation():
     for index, character in enumerate(equation):
         if character == '-':
-            if type(equation[index + 1]) == float:
-                if not index == 0 and type(equation[index - 1]) == float or (index != 0 and equation[index - 1] == ')'):
+            if not index == 0:
+                if not type(equation[index - 1]) == float and not equation[index - 1] == ')':
+                    if type(equation[index + 1]) == float:
+                        equation.pop(index)
+                        equation[index] = equation[index] * -1
+            else:
+                if type(equation[index + 1]) == float:
                     equation.pop(index)
-                    equation[index] = equation[index] * - 1
-                    equation.insert(index, '+')
-                else:
-                    equation.pop(index)
-                    equation[index] = equation[index] * - 1
+                    equation[index] = equation[index] * -1
 
         if character == '/':
             if type(equation[index + 1]) == float:
@@ -60,6 +64,7 @@ def correct_equation():
 
 
 def solve(given_equation):
+    print(given_equation)
     for operation in dict_math:
         check = False
         while not check:
@@ -73,6 +78,29 @@ def solve(given_equation):
                     break
                 else:
                     check = True
+
+    check = False
+    while not check:
+        for index, character in enumerate(given_equation):
+            if character == '+':
+                x = round(addition(given_equation[index - 1], given_equation[index + 1]), 10)
+                for c in range(0, 3):
+                    given_equation.pop(index - 1)
+                given_equation.insert(index - 1, x)
+                check = False
+                print(given_equation)
+                break
+            if character == '-':
+                x = round(subtraction(given_equation[index - 1], given_equation[index + 1]), 10)
+                for c in range(0, 3):
+                    given_equation.pop(index - 1)
+                given_equation.insert(index - 1, x)
+                check = False
+                print(given_equation)
+                break
+            else:
+                check = True
+    print(given_equation)
     return given_equation[0]
 
 
@@ -109,6 +137,8 @@ def isolate_bracket():
 
 
 string_to_list()
+print(equation)
 correct_equation()
+print(equation)
 isolate_bracket()
 print(round(equation[0], 4))
