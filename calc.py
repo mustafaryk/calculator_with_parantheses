@@ -55,7 +55,7 @@ def correct_equation():
                 if type(equation[index + 1]) == float:
                     equation.pop(index)
                     equation[index] = equation[index] * -1
-
+    for index, character in enumerate(equation):
         if character == '/':
             if type(equation[index + 1]) == float:
                 equation.pop(index)
